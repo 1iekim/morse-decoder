@@ -38,7 +38,23 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let arr = numbToDots(expr+'');
+    arr = arr.map(x => x.replace(/10/g, '.').replace(/11/g, '-').replace(/0/g,''));
+    return arr.map(x=>x= x.includes('*') ? ' ' : MORSE_TABLE[x]).join('');
+}
+
+function numbToDots(str) {
+    let ret = [];
+    let sub = '';
+    
+    for(let i = 0; i < str.length; i++) {
+        sub += str[i];
+        if(sub.length==10) {
+            ret.push(sub);
+            sub = '';
+        }
+    }
+    return ret;
 }
 
 module.exports = {
